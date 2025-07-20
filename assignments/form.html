@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comprehensive HTML Form Example</title>
+</head>
+<body>
+
+<h2>Registration Form</h2>
+
+<form action="/submit" method="post">
+
+    <!-- Text Input -->
+    <label for="fullname">Full Name:</label><br>
+    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required><br><br>
+
+    <!-- Password -->
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" placeholder="Enter password" required><br><br>
+
+    <!-- Email -->
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" placeholder="example@mail.com" required><br><br>
+
+    <!-- Number -->
+    <label for="age">Age:</label><br>
+    <input type="number" id="age" name="age" min="1" max="120" required><br><br>
+
+    <!-- Date -->
+    <label for="dob">Date of Birth:</label><br>
+    <input type="date" id="dob" name="dob" required><br><br>
+
+    <!-- Radio Buttons -->
+    <label>Gender:</label><br>
+    <input type="radio" id="male" name="gender" value="male" required>
+    <label for="male">Male</label><br>
+
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">Female</label><br>
+
+    <input type="radio" id="other" name="gender" value="other">
+    <label for="other">Other</label><br><br>
+
+    <!-- Checkbox -->
+    <label>Interests:</label><br>
+    <input type="checkbox" id="sports" name="interests" value="sports">
+    <label for="sports">Sports</label><br>
+
+    <input type="checkbox" id="music" name="interests" value="music">
+    <label for="music">Music</label><br>
+
+    <input type="checkbox" id="movies" name="interests" value="movies">
+    <label for="movies">Movies</label><br><br>
+
+    <!-- Color Picker -->
+    <label for="favcolor">Favorite Color:</label><br>
+    <input type="color" id="favcolor" name="favcolor"><br><br>
+
+    <!-- Range -->
+    <label for="satisfaction">Satisfaction Level (1 to 10):</label><br>
+    <input type="range" id="satisfaction" name="satisfaction" min="1" max="10"><br><br>
+
+    <!-- URL -->
+    <label for="website">Personal Website:</label><br>
+    <input type="url" id="website" name="website" placeholder="https://example.com"><br><br>
+
+    <!-- Telephone -->
+    <label for="phone">Phone Number:</label><br>
+    <input type="tel" id="phone" name="phone" placeholder="+1234567890"><br><br>
+
+    <!-- Time -->
+    <label for="appt">Preferred Appointment Time:</label><br>
+    <input type="time" id="appt" name="appt"><br><br>
+
+    <!-- Textarea -->
+    <label for="bio">Short Bio:</label><br>
+    <textarea id="bio" name="bio" rows="4" cols="40" placeholder="Tell us about yourself"></textarea><br><br>
+
+    <!-- Select Dropdown -->
+    <label for="country">Country:</label><br>
+    <select id="country" name="country" required>
+        <option value="">Select your country</option>
+        <option value="usa">USA</option>
+        <option value="india">India</option>
+        <option value="uk">United Kingdom</option>
+        <option value="australia">Australia</option>
+    </select><br><br>
+
+    <!-- Submit and Reset Buttons -->
+    <input type="submit" value="Register">
+    <input type="reset" value="Clear">
+
+</form>
+
+</body>
+</html>
