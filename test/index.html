@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Development Course</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background: #0a74da;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+    }
+    .module {
+      background: white;
+      margin: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .module-header {
+      background: #eee;
+      padding: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .lessons {
+      display: none;
+      padding: 15px;
+    }
+    .lesson {
+      margin-bottom: 20px;
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      font-family: monospace;
+      margin-top: 10px;
+    }
+    button.run {
+      background: #0a74da;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      margin: 5px 0;
+    }
+    iframe {
+      width: 100%;
+      height: 200px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Interactive Web Development Course</h1>
+    <p>Learn HTML, CSS, and JavaScript with live code examples!</p>
+  </header>
+
+  <!-- HTML MODULE -->
+  <div class="module">
+    <div class="module-header">📘 HTML Module</div>
+    <div class="lessons">
+      
+      <div class="lesson">
+        <details>
+          <summary>Introduction of HTML</summary>
+          <p>HTML is the standard markup language for creating webpages. It uses tags like <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code> to structure content.</p>
+          
+          <textarea id="html1">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My First Page</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+    <p>This is my first webpage.</p>
+  </body>
+</html>
+          </textarea>
+          <button class="run" onclick="runCode('html1','output1')">Run Code</button>
+          <iframe id="output1"></iframe>
+        </details>
+      </div>
+      
+      <div class="lesson">
+        <details>
+          <summary>Text Formatting Tags</summary>
+          <p>Examples of tags: <code>&lt;b&gt;</code>, <code>&lt;i&gt;</code>, <code>&lt;u&gt;</code>, <code>&lt;mark&gt;</code>.</p>
+          
+          <textarea id="html2">
+<!DOCTYPE html>
+<html>
+  <body>
+    <p><b>Bold text</b></p>
+    <p><i>Italic text</i></p>
+    <p><u>Underlined text</u></p>
+    <p><mark>Highlighted text</mark></p>
+  </body>
+</html>
+          </textarea>
+          <button class="run" onclick="runCode('html2','output2')">Run Code</button>
+          <iframe id="output2"></iframe>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CSS MODULE -->
+  <div class="module">
+    <div class="module-header">🎨 CSS Module</div>
+    <div class="lessons">
+
+      <div class="lesson">
+        <details>
+          <summary>Background Property</summary>
+          <p>CSS <code>background</code> lets you add color, gradients, or images to elements.</p>
+          
+          <textarea id="css1">
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    background: linear-gradient(to right, #ff9966, #66ccff);
+    color: white;
+    font-family: Arial;
+  }
+</style>
+</head>
+<body>
+  <h1>Beautiful Background</h1>
+</body>
+</html>
+          </textarea>
+          <button class="run" onclick="runCode('css1','output3')">Run Code</button>
+          <iframe id="output3"></iframe>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT MODULE -->
+  <div class="module">
+    <div class="module-header">⚡ JavaScript Module</div>
+    <div class="lessons">
+
+      <div class="lesson">
+        <details>
+          <summary>Variables and Data Types</summary>
+          <p>JavaScript has data types like string, number, boolean, object, array, etc.</p>
+
+          <textarea id="js1">
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+  var name = "John";
+  var age = 25;
+  document.write("Name: " + name + "&lt;br&gt;");
+  document.write("Age: " + age);
+</script>
+</body>
+</html>
+          </textarea>
+          <button class="run" onclick="runCode('js1','output4')">Run Code</button>
+          <iframe id="output4"></iframe>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Toggle lessons
+    document.querySelectorAll('.module-header').forEach(header => {
+      header.addEventListener('click', () => {
+        let lessons = header.nextElementSibling;
+        lessons.style.display = lessons.style.display === "block" ? "none" : "block";
+      });
+    });
+
+    // Run code function
+    function runCode(inputId, outputId) {
+      const code = document.getElementById(inputId).value;
+      const iframe = document.getElementById(outputId);
+      iframe.srcdoc = code;
+    }
+  </script>
+</body>
+</html>

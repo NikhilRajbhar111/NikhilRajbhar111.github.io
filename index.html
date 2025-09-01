@@ -1,222 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>HTML Learning Portal</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
-            margin: 20px;
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-            color: #2a4d69;
-            margin-bottom: 30px;
-        }
-        table {
-            width: 90%;
-            max-width: 900px;
-            margin: 0 auto;
-            border-collapse: collapse;
-            background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 12px 15px;
-            text-align: center;
-        }
-        th {
-            background-color: #4a90e2;
-            color: white;
-            font-size: 18px;
-        }
-        td a {
-            color: #1e73be;
-            text-decoration: none;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        td a:hover {
-            text-decoration: underline;
-        }
-        caption {
-            caption-side: top;
-            margin-bottom: 15px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #2a4d69;
-        }
-        #md-viewer {
-            max-width: 900px;
-            margin: 30px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            overflow-y: auto;
-            max-height: 600px;
-            display: none; /* hidden initially */
-        }
-        #md-viewer h2 {
-            margin-top: 0;
-            color: #2a4d69;
-        }
-        #close-btn {
-            background: #e74c3c;
-            color: white;
-            border: none;
-            padding: 8px 14px;
-            font-size: 14px;
-            border-radius: 4px;
-            cursor: pointer;
-            float: right;
-            margin-bottom: 10px;
-        }
-        pre {
-            background: #eee;
-            padding: 10px;
-            border-radius: 4px;
-            overflow-x: auto;
-        }
-        @media(max-width: 600px) {
-            body {
-                margin: 10px;
-            }
-            table {
-                width: 100%;
-                font-size: 14px;
-            }
-            th, td {
-                padding: 8px 10px;
-            }
-            #md-viewer {
-                max-height: 400px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>HTML Learning Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #2a4d69;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    .container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+    nav {
+      width: 300px;
+      background: #fff;
+      border-right: 1px solid #ddd;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    nav h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #2a4d69;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    nav li {
+      margin-bottom: 10px;
+    }
+    nav a {
+      display: block;
+      padding: 10px 12px;
+      background: #f8f9fb;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #1e73be;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    nav a:hover {
+      background: #e6eef7;
+    }
+    main {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #fff;
+    }
+    #md-content h2, #md-content h3 {
+      color: #2a4d69;
+    }
+    pre {
+      background: #eee;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    #close-btn {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    /* Mobile layout */
+    @media(max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      nav {
+        width: 100%;
+        border-right: none;
+        padding: 0;
+      }
+      nav h2 {
+        padding: 15px;
+        background: #2a4d69;
+        color: white;
+        margin: 0;
+      }
+      nav ul {
+        padding: 10px;
+      }
+      nav li {
+        margin-bottom: 10px;
+      }
+      nav a {
+        border: 1px solid #ddd;
+        background: white;
+      }
+      main {
+        padding: 15px;
+      }
+      /* Accordion behavior */
+      nav ul {
+        display: none;
+      }
+      nav.active ul {
+        display: block;
+      }
+      nav h2 {
+        cursor: pointer;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<h1>HTML Learning Portal</h1>
+  <div class="container">
+    <nav>
+      <h2 id="topics-header">Topics</h2>
+      <ul>
+        <li><a href="#" data-md="intro-to-html.md" class="md-link">Introduction to HTML</a></li>
+        <li><a href="#" data-md="attributes-body-font.md" class="md-link">Attributes, Body and Font Tag</a></li>
+        <li><a href="#" data-md="list.md" class="md-link">List</a></li>
+        <li><a href="#" data-md="image-anchor.md" class="md-link">Image and Anchor</a></li>
+        <li><a href="#" data-md="tables.md" class="md-link">Tables and Nested Table</a></li>
+        <li><a href="#" data-md="form.md" class="md-link">Forms</a></li>
+        <li><a href="#" data-md="forms-table.md" class="md-link">Forms and Table</a></li>
+        <li><a href="#" data-md="media-no-controls.md" class="md-link">Audio and Video</a></li>
+        <li><a href="#" data-md="iframe-marquee.md" class="md-link">iFrame and Marquee Tag</a></li>
+        <li><a href="final.html" target="_blank">Final Assignment</a></li>
+        <li><a href="#" data-md="css.md" class="md-link">One shot CSS</a></li>
+        <li><a href="#" data-md="background.md" class="md-link">Background</a></li>
+        <li><a href="#" data-md="positions.md" class="md-link">Positions</a></li>
+        <li><a href="#" data-md="display.md" class="md-link">Display</a></li>
+        <li><a href="#" data-md="animation.md" class="md-link">Animation</a></li>
+      </ul>
+    </nav>
+    <main>
+      <button id="close-btn" style="display:none;">Close</button>
+      <div id="md-content">
+        <h2>Welcome</h2>
+        <p>Select a topic from the left to view its content.</p>
+      </div>
+    </main>
+  </div>
 
-<table>
-    <caption>Learn, Practice & Get Help</caption>
-    <thead>
-        <tr>
-            <th>Topic</th>
-            <th>Learn</th>
-            <th>Assignment</th>
-            <th>Answer</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Introduction to HTML</td>
-            <td><a href="#" data-md="intro-to-html.md" class="md-link">Learn</a></td>
-        </tr>
-        <tr>
-            <td>Attributes, Body and Font Tag</td>
-            <td><a href="#" data-md="attributes-body-font.md" class="md-link">Learn</a></td>
-        </tr>
-        <tr>
-            <td>List</td>
-            <td><a href="#" data-md="list.md" class="md-link">Learn</a></td>
-            <td><a href="assignments/list.html" target="_blank">Assignment</a></td>
-            <td><a href="#" data-md="answsers/list.md" class="md-link">Answer</a></td>
-        </tr>
-        <tr>
-            <td>Image and Anchor</td>
-            <td><a href="#" data-md="image-anchor.md" class="md-link">Learn</a></td>
-        </tr>
-        <tr>
-            <td>Tables and Nested Table</td>
-            <td><a href="#" data-md="tables.md" class="md-link">Learn</a></td>
-            <td><a href="assignments/table.html" target="_blank">Assignment</a></td>
-            <td><a href="#" data-md="answsers/table.md" class="md-link">Answer</a></td>
-        </tr>
-        <tr>
-            <td>Forms</td>
-            <td><a href="#" data-md="form.md" class="md-link">Learn</a></td>
-            <td><a href="assignments/form.html" target="_blank">Assignment</a></td>
-            <td><a href="#" data-md="answsers/form.md" class="md-link">Answer</a></td>
-        </tr>
-        <tr>
-            <td>Forms and Table</td>
-            <td><a href="#" data-md="forms-table.md" class="md-link">Learn</a></td>
-            <td><a href="assignments/form table.html" target="_blank">Assignment</a></td>
-            <td><a href="#" data-md="answsers/form table.md" class="md-link">Answer</a></td>
-        </tr>
-        <tr>
-            <td>Audio and Video</td>
-            <td><a href="#" data-md="media-no-controls.md" class="md-link">Learn</a></td>
-         
-        </tr>
-        <tr>
-            <td>iFrame and Marquee Tag</td>
-            <td><a href="#" data-md="iframe-marquee.md" class="md-link">Learn</a></td>
-            <td><a href="assignments/iframe.html" target="_blank">Assignment</a></td>
-            <td><a href="#" data-md="answsers/iframe.md" class="md-link">Answer</a></td>
-        </tr>
-        <tr>
-            <td>Final Assignment</td>
-            <td><a href="final.html" target="_blank">Assignment</a></td>
-        </tr>
-        <tr>
-            <td>One shot CSS</td>
-            <td><a href="#" data-md="css.md" class="md-link">Learn</a></td>
-        </tr>
-    </tbody>
-</table>
-
-<!-- Markdown Viewer Container -->
-<div id="md-viewer">
-    <button id="close-btn">Close</button>
-    <div id="md-content"></div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script>
-    const mdViewer = document.getElementById('md-viewer');
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
     const mdContent = document.getElementById('md-content');
     const closeBtn = document.getElementById('close-btn');
+    const nav = document.querySelector('nav');
+    const headerToggle = document.getElementById('topics-header');
 
-    // Function to load and render markdown file
     function loadMarkdown(mdFile) {
-        mdContent.innerHTML = 'Loading...';
-        fetch(mdFile)
-            .then(res => {
-                if (!res.ok) throw new Error('File not found');
-                return res.text();
-            })
-            .then(md => {
-                mdContent.innerHTML = marked.parse(md);
-                mdViewer.style.display = 'block';
-                window.scrollTo(0, 0);
-            })
-            .catch(err => {
-                mdContent.innerHTML = `<p style="color:red;">Error loading file: ${err.message}</p>`;
-                mdViewer.style.display = 'block';
-            });
+      mdContent.innerHTML = 'Loading...';
+      fetch(mdFile)
+        .then(res => {
+          if (!res.ok) throw new Error('File not found');
+          return res.text();
+        })
+        .then(md => {
+          mdContent.innerHTML = marked.parse(md);
+          closeBtn.style.display = 'inline-block';
+          window.scrollTo(0, 0);
+        })
+        .catch(err => {
+          mdContent.innerHTML = `<p style="color:red;">Error loading file: ${err.message}</p>`;
+          closeBtn.style.display = 'inline-block';
+        });
     }
 
-    // Attach event listeners to all md-links
     document.querySelectorAll('.md-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const mdFile = e.target.getAttribute('data-md');
-            if(mdFile) loadMarkdown(mdFile);
-        });
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const mdFile = e.target.getAttribute('data-md');
+        if(mdFile) loadMarkdown(mdFile);
+      });
     });
 
-    // Close button handler
     closeBtn.addEventListener('click', () => {
-        mdViewer.style.display = 'none';
-        mdContent.innerHTML = '';
+      mdContent.innerHTML = '<h2>Welcome</h2><p>Select a topic from the left to view its content.</p>';
+      closeBtn.style.display = 'none';
     });
-</script>
 
+    headerToggle.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        nav.classList.toggle('active');
+      }
+    });
+  </script>
 </body>
 </html>
