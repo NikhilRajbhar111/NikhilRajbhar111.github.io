@@ -5,160 +5,359 @@
   <title>HTML Learning Portal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f4f8;
-      margin: 0;
-      padding: 0;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+    :root{
+      --bg:#f0f4f8;
+      --ink:#333;
+      --brand:#2a4d69;
+      --link:#1e73be;
+      --card:#fff;
+      --muted:#e9eef5;
+      --border:#dde4ee;
+      --danger:#e74c3c;
+      --success:#2ecc71;
     }
-    header {
-      background: #2a4d69;
-      color: white;
-      text-align: center;
-      padding: 20px;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
     }
-    header h1 {
-      margin: 0;
-      font-size: 28px;
+    header{
+      background:var(--brand);
+      color:#fff;
+      padding:18px 24px;
+      position:sticky;
+      top:0;
+      z-index:10;
+      box-shadow:0 2px 8px rgba(0,0,0,.12);
     }
-    .container {
-      display: flex;
-      flex: 1;
-      overflow: hidden;
+    header h1{margin:0;font-size:22px;letter-spacing:.2px}
+    .container{
+      display:flex;
+      gap:16px;
+      padding:16px;
+      flex:1;
+      min-height:0;
     }
-    nav {
-      width: 300px;
-      background: #fff;
-      border-right: 1px solid #ddd;
-      overflow-y: auto;
-      padding: 20px;
+    nav{
+      width:340px;
+      flex:0 0 340px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px;
+      overflow:auto;
+      position:sticky;
+      top:86px;
+      max-height:calc(100vh - 102px);
+      box-shadow:0 4px 14px rgba(0,0,0,.06);
     }
-    nav h2 {
-      font-size: 20px;
-      margin-bottom: 15px;
-      color: #2a4d69;
+    nav h2{
+      margin:6px 8px 12px;
+      font-size:16px;
+      color:var(--brand);
     }
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .topic{
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      margin:10px 6px;
+      overflow:hidden;
+      box-shadow:0 2px 8px rgba(0,0,0,.04);
     }
-    nav li {
-      margin-bottom: 10px;
+    .topic summary{
+      list-style:none;
+      cursor:pointer;
+      padding:12px 14px;
+      font-weight:600;
+      color:#16324a;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background:var(--muted);
+      user-select:none;
     }
-    nav a {
-      display: block;
-      padding: 10px 12px;
-      background: #f8f9fb;
-      border-radius: 6px;
-      text-decoration: none;
-      color: #1e73be;
-      font-weight: bold;
-      transition: background 0.2s;
+    .topic[open] summary{border-bottom:1px solid var(--border)}
+    .chev{
+      transition:transform .2s ease;
+      font-size:12px;
+      opacity:.7;
     }
-    nav a:hover {
-      background: #e6eef7;
+    .topic[open] .chev{transform:rotate(90deg)}
+    .actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      padding:12px;
+      background:#fff;
     }
-    main {
-      flex: 1;
-      padding: 20px;
-      overflow-y: auto;
-      background: #fff;
+    .btn{
+      display:inline-block;
+      padding:9px 12px;
+      border-radius:10px;
+      font-size:14px;
+      font-weight:600;
+      text-decoration:none;
+      border:1px solid var(--border);
+      background:#f8fafc;
+      color:var(--link);
+      transition:transform .03s ease, box-shadow .15s ease, background .2s ease;
+      white-space:nowrap;
     }
-    #md-content h2, #md-content h3 {
-      color: #2a4d69;
+    .btn:hover{background:#eef4fb; box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{background:#2563eb; color:#fff; border-color:#2563eb}
+    .btn.success{background:var(--success); color:#fff; border-color:var(--success)}
+    .btn.danger{background:var(--danger); color:#fff; border-color:var(--danger)}
+    .btn.ghost{background:#fff; color:var(--link)}
+    main{
+      flex:1;
+      min-width:0;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:18px;
+      overflow:auto;
+      box-shadow:0 6px 18px rgba(0,0,0,.06);
     }
-    pre {
-      background: #eee;
-      padding: 10px;
-      border-radius: 4px;
-      overflow-x: auto;
+    #md-content h1,#md-content h2,#md-content h3{color:var(--brand)}
+    #md-content pre{
+      background:#0b1220;
+      color:#e6edf3;
+      padding:14px;
+      border-radius:10px;
+      overflow:auto;
     }
-    #close-btn {
-      background: #e74c3c;
-      color: white;
-      border: none;
-      padding: 8px 14px;
-      font-size: 14px;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-bottom: 10px;
+    #close-btn{
+      display:none;
+      background:var(--danger);
+      color:#fff;
+      border:none;
+      padding:8px 12px;
+      border-radius:8px;
+      cursor:pointer;
+      margin-bottom:12px;
+      font-weight:600;
     }
-
-    /* Mobile layout */
-    @media(max-width: 768px) {
-      .container {
-        flex-direction: column;
+    /* Desktop: keep topics expanded as cards, non-accordion look */
+    @media(min-width: 1025px){
+      .topic summary{cursor:default}
+      .topic summary::marker{content:""}
+      .topic .chev{display:none}
+    }
+    /* Tablet & Mobile */
+    @media(max-width: 1024px){
+      .container{flex-direction:column}
+      nav{
+        position:static;
+        width:100%;
+        max-height:none;
+        top:auto;
       }
-      nav {
-        width: 100%;
-        border-right: none;
-        padding: 0;
-      }
-      nav h2 {
-        padding: 15px;
-        background: #2a4d69;
-        color: white;
-        margin: 0;
-      }
-      nav ul {
-        padding: 10px;
-      }
-      nav li {
-        margin-bottom: 10px;
-      }
-      nav a {
-        border: 1px solid #ddd;
-        background: white;
-      }
-      main {
-        padding: 15px;
-      }
-      /* Accordion behavior */
-      nav ul {
-        display: none;
-      }
-      nav.active ul {
-        display: block;
-      }
-      nav h2 {
-        cursor: pointer;
-      }
+      main{padding:16px}
+    }
+    @media(max-width: 640px){
+      header h1{font-size:18px}
+      .btn{flex:1 1 calc(50% - 8px); text-align:center}
+      .actions{padding:10px}
+      .topic summary{padding:12px}
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>HTML Learning Portal</h1>
+  </header>
 
   <div class="container">
-    <nav>
-      <h2 id="topics-header">Topics</h2>
-      <ul>
-        <li><a href="#" data-md="intro-to-html.md" class="md-link">Introduction to HTML</a></li>
-        <li><a href="#" data-md="attributes-body-font.md" class="md-link">Attributes, Body and Font Tag</a></li>
-        <li><a href="#" data-md="list.md" class="md-link">List</a></li>
-        <li><a href="#" data-md="image-anchor.md" class="md-link">Image and Anchor</a></li>
-        <li><a href="#" data-md="tables.md" class="md-link">Tables and Nested Table</a></li>
-        <li><a href="#" data-md="form.md" class="md-link">Forms</a></li>
-        <li><a href="#" data-md="forms-table.md" class="md-link">Forms and Table</a></li>
-        <li><a href="#" data-md="media-no-controls.md" class="md-link">Audio and Video</a></li>
-        <li><a href="#" data-md="iframe-marquee.md" class="md-link">iFrame and Marquee Tag</a></li>
-        <li><a href="final.html" target="_blank">Final Assignment</a></li>
-        <li><a href="#" data-md="css.md" class="md-link">One shot CSS</a></li>
-        <li><a href="#" data-md="background.md" class="md-link">Background</a></li>
-        <li><a href="#" data-md="positions.md" class="md-link">Positions</a></li>
-        <li><a href="#" data-md="display.md" class="md-link">Display</a></li>
-        <li><a href="#" data-md="animation.md" class="md-link">Animation</a></li>
-      </ul>
+    <nav aria-label="Topics">
+      <h2>Learn, Practice & Get Help</h2>
+
+      <!-- Introduction to HTML -->
+      <details class="topic" open>
+        <summary>
+          Introduction to HTML
+          <span class="chev">▶</span>
+        </summary>
+        <div class="actions">
+          <a href="#" class="btn primary md-link" data-md="intro-to-html.md">Learn</a>
+        </div>
+      </details>
+
+      <!-- Attributes, Body and Font Tag -->
+      <details class="topic" open>
+        <summary>
+          Attributes, Body and Font Tag
+          <span class="chev">▶</span>
+        </summary>
+        <div class="actions">
+          <a href="#" class="btn primary md-link" data-md="attributes-body-font.md">Learn</a>
+        </div>
+      </details>
+
+      <!-- List -->
+      <details class="topic" open>
+        <summary>
+          List
+          <span class="chev">▶</span>
+        </summary>
+        <div class="actions">
+          <a href="#" class="btn primary md-link" data-md="list.md">Learn</a>
+          <a href="assignments/list.html" target="_blank" rel="noopener" class="btn ghost">Assignment</a>
+          <a href="#" class="btn success md-link" data-md="answsers/list.md">Answer</a>
+        </div>
+      </details>
+
+      <!-- Image and Anchor -->
+      <details class="topic" open>
+        <summary>
+          Image and Anchor
+          <span class="chev">▶</span>
+        </summary>
+        <div class="actions">
+          <a href="#" class="btn primary md-link" data-md="image-anchor.md">Learn</a>
+        </div>
+      </details>
+
+      <!-- Tables and Nested Table -->
+      <details class="topic" open>
+        <summary>
+          Tables and Nested Table
+          <span class="chev">▶</span>
+        </summary>
+        <div class="actions">
+          <a href="#" class="btn primary md-link" data-md="tables.md">Learn</a>
+          <a href="assignments/table.html" target="_blank" rel="noopener" class="btn ghost">Assignment</a>
+          <a href="#" class="btn success md-link" data-md="answsers/table.md">Answer</a>
+        </div>
+      </details>
+
+      <!-- Forms -->
+      <details class="topic" open>
+        <summary>
+          Forms
+          <span class="chev">▶</span>
+        </summary>
+        <div class="actions">
+          <a href="#" class="btn primary md-link" data-md="form.md">Learn</a>
+          <a href="assignments/form.html" target="_blank" rel="noopener" class="btn ghost">Assignment</a>
+          <a href="#" class="btn success md-link" data-md="answsers/form.md">Answer</a>
+        </div>
+      </details>
+
+      <!-- Forms and Table -->
+      <details class="topic" open>
+        <summary>
+          Forms and Table
+          <span class="chev">▶</span>
+        </summary>
+        <div class="actions">
+          <a href="#" class="btn primary md-link" data-md="forms-table.md">Learn</a>
+          <a href="assignments/form table.html" target="_blank" rel="noopener" class="btn ghost">Assignment</a>
+          <a href="#" class="btn success md-link" data-md="answsers/form table.md">Answer</a>
+        </div>
+      </details>
+
+      <!-- Audio and Video -->
+      <details class="topic" open>
+        <summary>
+          Audio and Video
+          <span class="chev">▶</span>
+        </summary>
+        <div class="actions">
+          <a href="#" class="btn primary md-link" data-md="media-no-controls.md">Learn</a>
+        </div>
+      </details>
+
+      <!-- iFrame and Marquee Tag -->
+      <details class="topic" open>
+        <summary>
+          iFrame and Marquee Tag
+          <span class="chev">▶</span>
+        </summary>
+        <div class="actions">
+          <a href="#" class="btn primary md-link" data-md="iframe-marquee.md">Learn</a>
+          <a href="assignments/iframe.html" target="_blank" rel="noopener" class="btn ghost">Assignment</a>
+          <a href="#" class="btn success md-link" data-md="answsers/iframe.md">Answer</a>
+        </div>
+      </details>
+
+      <!-- Final Assignment -->
+      <details class="topic" open>
+        <summary>
+          Final Assignment
+          <span class="chev">▶</span>
+        </summary>
+        <div class="actions">
+          <a href="final.html" target="_blank" rel="noopener" class="btn danger">Open</a>
+        </div>
+      </details>
+
+      <!-- CSS One Shot -->
+      <details class="topic" open>
+        <summary>
+          One shot CSS
+          <span class="chev">▶</span>
+        </summary>
+        <div class="actions">
+          <a href="#" class="btn primary md-link" data-md="css.md">Learn</a>
+        </div>
+      </details>
+
+      <!-- Background -->
+      <details class="topic" open>
+        <summary>
+          Background
+          <span class="chev">▶</span>
+        </summary>
+        <div class="actions">
+          <a href="#" class="btn primary md-link" data-md="background.md">Learn</a>
+        </div>
+      </details>
+
+      <!-- Positions -->
+      <details class="topic" open>
+        <summary>
+          Positions
+          <span class="chev">▶</span>
+        </summary>
+        <div class="actions">
+          <a href="#" class="btn primary md-link" data-md="positions.md">Learn</a>
+        </div>
+      </details>
+
+      <!-- Display -->
+      <details class="topic" open>
+        <summary>
+          Display
+          <span class="chev">▶</span>
+        </summary>
+        <div class="actions">
+          <a href="#" class="btn primary md-link" data-md="display.md">Learn</a>
+        </div>
+      </details>
+
+      <!-- Animation -->
+      <details class="topic" open>
+        <summary>
+          Animation
+          <span class="chev">▶</span>
+        </summary>
+        <div class="actions">
+          <a href="#" class="btn primary md-link" data-md="animation.md">Learn</a>
+        </div>
+      </details>
     </nav>
+
     <main>
-      <button id="close-btn" style="display:none;">Close</button>
+      <button id="close-btn">Close</button>
       <div id="md-content">
         <h2>Welcome</h2>
-        <p>Select a topic from the left to view its content.</p>
+        <p>Select a topic. Use Learn to view notes, Assignment to practice, Answer to verify.</p>
       </div>
     </main>
   </div>
@@ -167,44 +366,49 @@
   <script>
     const mdContent = document.getElementById('md-content');
     const closeBtn = document.getElementById('close-btn');
-    const nav = document.querySelector('nav');
-    const headerToggle = document.getElementById('topics-header');
 
-    function loadMarkdown(mdFile) {
-      mdContent.innerHTML = 'Loading...';
+    function loadMarkdown(mdFile){
+      mdContent.innerHTML = 'Loading…';
       fetch(mdFile)
-        .then(res => {
-          if (!res.ok) throw new Error('File not found');
-          return res.text();
-        })
+        .then(res => { if(!res.ok) throw new Error('File not found'); return res.text(); })
         .then(md => {
           mdContent.innerHTML = marked.parse(md);
           closeBtn.style.display = 'inline-block';
-          window.scrollTo(0, 0);
+          window.scrollTo({top:0,behavior:'smooth'});
         })
         .catch(err => {
-          mdContent.innerHTML = `<p style="color:red;">Error loading file: ${err.message}</p>`;
+          mdContent.innerHTML = `<p style="color:#e11d48;font-weight:600">Error: ${err.message}</p>`;
           closeBtn.style.display = 'inline-block';
         });
     }
 
-    document.querySelectorAll('.md-link').forEach(link => {
-      link.addEventListener('click', e => {
+    document.querySelectorAll('.md-link').forEach(el=>{
+      el.addEventListener('click',e=>{
         e.preventDefault();
-        const mdFile = e.target.getAttribute('data-md');
+        const mdFile = el.getAttribute('data-md');
         if(mdFile) loadMarkdown(mdFile);
       });
     });
 
-    closeBtn.addEventListener('click', () => {
-      mdContent.innerHTML = '<h2>Welcome</h2><p>Select a topic from the left to view its content.</p>';
+    closeBtn.addEventListener('click',()=>{
+      mdContent.innerHTML = '<h2>Welcome</h2><p>Select a topic. Use Learn to view notes, Assignment to practice, Answer to verify.</p>';
       closeBtn.style.display = 'none';
     });
 
-    headerToggle.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        nav.classList.toggle('active');
-      }
+    // Responsive accordion control: open cards on desktop, collapse on small screens
+    const topics = Array.from(document.querySelectorAll('.topic'));
+    function setDetailsByWidth(){
+      const wide = window.matchMedia('(min-width: 1025px)').matches;
+      topics.forEach(d=>{
+        if(wide){ d.setAttribute('open',''); }
+        else{ d.removeAttribute('open'); }
+      });
+    }
+    setDetailsByWidth();
+    let resizeTO;
+    window.addEventListener('resize',()=>{
+      clearTimeout(resizeTO);
+      resizeTO = setTimeout(setDetailsByWidth,120);
     });
   </script>
 </body>
